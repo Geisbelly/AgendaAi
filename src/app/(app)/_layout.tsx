@@ -9,6 +9,8 @@ import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Ionicons } from '@expo/vector-icons';
 import { Children, ReactNode } from 'react';
 import App from './Agenda';
+import WebAgenda from '@/components/ui/desktop/WebAgenda';
+import MobileAgenda from '@/components/ui/mobile/MobileAgenda';
 
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -21,7 +23,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       {/* Exibe Drawer para Web */}
       {Platform.OS === 'web' ? (
         <Drawer>
-          <Drawer.Screen name="Agenda" options={{ title: 'Agenda' }} />
+          <Drawer.Screen name="Agenda" options={{ title: 'Agenda' }} initialParams={[WebAgenda]}/>
         </Drawer>
       ) : (
         // Exibe Tabs para dispositivos móveis
@@ -56,7 +58,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         //   />
         // </Tabs>
        <View style={{ flex: 1 }}>
-       <App />
+       <MobileAgenda></MobileAgenda>
         </View>
       )}
 

@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import LocaleConfig from '../../../../assets/static/configuracoes';
 import { styles } from '@/style/style';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import Agendamento from '@/models/Agendamento';
-import MonthPicker from 'react-native-month-year-picker';
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+
+// Importação condicional de MonthPicker
+
 
 moment.locale('pt-br');
 
@@ -54,17 +58,19 @@ const ModoSemana = ({ selectedDate, setSelectedDate, filteredAppointment }: { se
               
             </TouchableOpacity>
             {show && (
-              <MonthPicker
-                onChange={(event, newDate) => {
-                  console.log(newDate);
-                  setShow(false);
-                  setCurrentWeek(moment.utc(newDate));
-                }}
-                value={currentWeek.toDate()}
-                cancelButton='Cancelar'
-                okButton='Confirmar'
-                autoTheme={false}
-                mode='short'
+              <DatePicker
+              onChange={(newDate: Date | null) => {
+                console.log(newDate);
+                setShow(false);
+                setCurrentWeek(moment.utc(newDate));
+                
+              }}
+             
+              value={currentWeek.toDate().toUTCString()}
+              customInput={<button onClick={() => setShow(false)}>Cancelar</button>}
+        
+  
+       
               />
             )}
 

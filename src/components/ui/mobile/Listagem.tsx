@@ -39,7 +39,7 @@ const Listagem = ({ selectedDate, filteredAppointment, setLista }: { selectedDat
                 style={styles.list}
                 showsVerticalScrollIndicator={false}
                 renderItem={({ item: [horario, appointments] }) => (
-                    <ConatinerCardsLista key={horario} horario={horario} appointments={appointments} setLista={setLista} />
+                    <ConatinerCardsLista key={horario} horario={horario} appointments={appointments} setLista={setLista} selectedDate={selectedDate} />
                 )}
             />):(
                 <View style={styles_form.container}>

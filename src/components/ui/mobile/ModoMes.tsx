@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Platform } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { styles } from '@/style/style';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import Agendamento from '@/models/Agendamento';
-import MonthPicker from 'react-native-month-year-picker';
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+
 
 moment.locale('pt-br');
 
@@ -48,7 +50,7 @@ const ModoMes = ({ selectedDate, setSelectedDate, filteredAppointment }: { selec
       selected: true,
       selectedColor: '#1E88E5',
       marked: true,
-      dots: (newMarkedDates[selectedDate]?.dots || [])
+      dots: (newMarkedDates[selectedDate]?.dots || []),
     };
 
     setMarkedDates(newMarkedDates);
@@ -79,16 +81,12 @@ const ModoMes = ({ selectedDate, setSelectedDate, filteredAppointment }: { selec
                 </Text>
               </TouchableOpacity>
               {show && (
-                <MonthPicker
-                  onChange={(event, newDate) => {
-                    setShow(false);
-                    setCurrentWeek(moment(newDate));
-                  }}
-                  value={currentWeek.toDate()}
-                  cancelButton='Cancelar'
-                  okButton='Confirmar'
-                  autoTheme={false}
-                  mode='short'
+                <DatePicker
+                selected={currentWeek.toDate()}
+                onChange={handleMonthChange}
+                showMonthYearPicker
+                dateFormat="MM/yyyy"
+                className="react-datepicker__input"
                 />
               )}
             </View>

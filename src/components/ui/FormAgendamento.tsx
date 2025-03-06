@@ -12,8 +12,7 @@ import { getData, saveData, updateData, editData } from '@/backend/cadastros/asy
 const ScheduleModal = ({ visible, onClose, item, Title, setLista, selectedDate }: { visible: boolean, onClose: () => void, item?: Agendamento, Title?: string, setLista: (date: string | false | any[]) => void, selectedDate:any }) => {
   const { control, handleSubmit, setValue, formState: { errors } } = useForm();
   const [data, setData] = useState(new Date());
-  const [hora, setHora] = useState(new Date());
-  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [hora, setHora] = useState(new Date());  const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [id, setId] = useState<number | null>(null);
 
@@ -27,7 +26,6 @@ const ScheduleModal = ({ visible, onClose, item, Title, setLista, selectedDate }
       setId(item.id);
       setValue('id', item.id);
       setValue('status', item.status);
-      setValue('date', new Date(item.dt_consulta).setDate(new Date(item.dt_consulta).getDate() + 1));
       setData(item.dt_consulta ? new Date(item.dt_consulta).setDate(new Date(item.dt_consulta).getDate() + 1) : selectedDate);
       setHora(item.horario ? moment(item.horario, 'HH:mm').toDate() : new Date());
     }

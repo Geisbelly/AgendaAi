@@ -15,13 +15,14 @@ const MobileAgenda = () => {
 
   async function get ()  {
     const lis = await getData('@agendamentos');
-    setLista(lis);
+    if (lis){
+      setLista(lis);
+    }
+   
   };
 
   const init = useCallback(() => {
-    if(lista=== null){ 
-      setLista([])
-    }
+    
     const filtered = lista.map((app: Agendamento) => ({
       ...app,
       hora_criacao: app.hora_criacao || '00:00',

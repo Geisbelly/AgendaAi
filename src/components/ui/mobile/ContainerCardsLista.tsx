@@ -5,7 +5,7 @@ import { styles } from '@/style/style';
 import CardList from '@/components/ui/mobile/CardList';
 import Agendamento from '@/models/Agendamento';
 
-const ConatinerCardsLista = ({ horario, appointments, setLista }: { horario: string, appointments: Agendamento[], setLista:(date: any) => void }) => {
+const ConatinerCardsLista = ({ horario, appointments, setLista,selectedDate }: { horario: string, appointments: Agendamento[], setLista:(date: any) => void, selectedDate:any }) => {
     return (
         <>
         <View style={styles.card}>
@@ -14,7 +14,7 @@ const ConatinerCardsLista = ({ horario, appointments, setLista }: { horario: str
             </View>
             <View style={styles.containerContainerCardList}>
                 {appointments.map(appointment => (
-                    <CardList  item={appointment} setLista={setLista} />
+                    <CardList  item={appointment} setLista={setLista} selectedDate={selectedDate}/>
                 ))}
             </View>
         </View>
