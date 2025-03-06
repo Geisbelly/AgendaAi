@@ -23,8 +23,10 @@ const postData = async (formData: Agendamento) => {
     if (response.ok) {
       const responseData = await response.json();
       console.log('Agendamento salvo com sucesso!', responseData);
+      return response.ok
     } else {
       console.error('Erro ao salvar agendamento', response.statusText);
+      return null
     }
   } catch (error) {
     console.error('Erro de rede ao salvar agendamento:', error);

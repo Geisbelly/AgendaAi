@@ -5,9 +5,7 @@ import {styles} from '@/style/style';
 import ScheduleModal from '@/components/ui/FormAgendamento';
 import Agendamento from '@/models/Agendamento';
 
-
-
-const CardList = (item: Agendamento) => {
+const CardList = ({item, setLista}: {item:Agendamento, setLista:(data: any)=>void}) => {
     const [isVisible, setIsVisible] = useState(false);
     
       const toggleModal = () => {
@@ -29,7 +27,7 @@ const CardList = (item: Agendamento) => {
                     </View>
                 </View>
             </TouchableOpacity>
-            <ScheduleModal visible={isVisible} onClose={toggleModal} item={item} Title='Editar Agendamento' />
+            <ScheduleModal visible={isVisible} onClose={toggleModal} item={item} Title='Editar Agendamento' setLista={setLista} />
         </>
 
   );

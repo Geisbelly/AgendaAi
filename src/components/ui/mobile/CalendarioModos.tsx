@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import {styles} from '@/style/style';
 import ModoMes from './ModoMes';
 import ModoSemana from './ModoSemana';
@@ -15,11 +14,7 @@ const CalendarioModos = ({ selectedDate, setSelectedDate, filteredAppointment }:
     <>
       <View style={styles.top}>
         <Text style={styles.title}>Agenda</Text>
-        {/* <View style={styles.containeButtonsCalendario}>
-          <TouchableOpacity onPress={() => setViewMode(viewMode === 'month' ? 'week' : 'month')}>
-            <Ionicons name={viewMode === 'month' ? "calendar-outline" : "calendar"} size={30} color="#1E88E5" />
-          </TouchableOpacity>
-        </View> */}
+
        <ToggleButton selected={viewMode} onChange={(value) => setViewMode(value)} />
       </View>
 

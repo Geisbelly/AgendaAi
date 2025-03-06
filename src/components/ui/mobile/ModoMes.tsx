@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { styles } from '@/style/style';
-import moment, { months } from 'moment';
+import moment from 'moment';
 import 'moment/locale/pt-br';
 import Agendamento from '@/models/Agendamento';
 import MonthPicker from 'react-native-month-year-picker';
@@ -16,7 +16,7 @@ interface MyObject {
 const ModoMes = ({ selectedDate, setSelectedDate, filteredAppointment }: { selectedDate: string; setSelectedDate: (date: string) => void, filteredAppointment: Agendamento[] }) => {
   const [currentWeek, setCurrentWeek] = useState(moment(selectedDate));
   const [markedDates, setMarkedDates] = useState<{ [key: string]: any }>({});
-   const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     // Filtrando os agendamentos para o mês atual
@@ -25,25 +25,30 @@ const ModoMes = ({ selectedDate, setSelectedDate, filteredAppointment }: { selec
       moment(agendamento.dt_consulta).isBefore(moment(currentWeek).endOf('month'))
     );
 
+    // Agrupar os agendamentos pelas cores
     const newMarkedDates = agendamentos.reduce((acc: MyObject, agendamento) => {
-      const date = moment.utc(agendamento.dt_consulta).format('YYYY-MM-DD');  // Usando o formato 'YYYY-MM-DD'
-
+      const date = moment.utc(agendamento.dt_consulta).format('YYYY-MM-DD'); // Usando o formato 'YYYY-MM-DD'
       const dot = { key: agendamento.profissional, color: agendamento.color };
 
       if (!acc[date]) {
-        acc[date] = { marked: true, dots: [] };  
+        acc[date] = { marked: true, dots: [] };
       }
 
-      acc[date].dots.push(dot); 
+      // Adicionar a bolinha apenas se a cor ainda não tiver sido adicionada
+      const existingDot = acc[date].dots.some((dotItem: any) => dotItem.color === agendamento.color);
+      if (!existingDot) {
+        acc[date].dots.push(dot); // Adiciona a bolinha única por cor
+      }
+
       return acc;
     }, {});
 
-   
-    newMarkedDates[selectedDate] = { 
-      selected: true, 
-      selectedColor: '#1E88E5', 
-      marked: true, 
-      dots: (newMarkedDates[selectedDate]?.dots || []) 
+    // Marcar o dia selecionado com cor diferente
+    newMarkedDates[selectedDate] = {
+      selected: true,
+      selectedColor: '#1E88E5',
+      marked: true,
+      dots: (newMarkedDates[selectedDate]?.dots || [])
     };
 
     setMarkedDates(newMarkedDates);
@@ -58,7 +63,7 @@ const ModoMes = ({ selectedDate, setSelectedDate, filteredAppointment }: { selec
   return (
     <>
       <Calendar
-       key={currentWeek.format('YYYY-MM')}
+        key={currentWeek.format('YYYY-MM')}
         current={currentWeek.format('YYYY-MM-DD')}
         onDayPress={handleDayPress}
         onMonthChange={handleMonthChange}
@@ -68,43 +73,36 @@ const ModoMes = ({ selectedDate, setSelectedDate, filteredAppointment }: { selec
         renderHeader={(date: Date) => (
           <View>
             <View style={styles.heardCalendario}>
-              <TouchableOpacity  onPress={() => setShow(true)} style={styles.containeTextCalendario}>
+              <TouchableOpacity onPress={() => setShow(true)} style={styles.containeTextCalendario}>
                 <Text style={styles.monthSelector}>
                   {moment(currentWeek).format('MMMM [de] YYYY').replace(/^\w/, (c) => c.toUpperCase())}
                 </Text>
               </TouchableOpacity>
               {show && (
-              <MonthPicker
-                onChange={(event, newDate) => {
-                  setShow(false);
-                  setCurrentWeek(moment(newDate));
-             ;
-                }}
-                value={currentWeek.toDate()}
-                cancelButton='Cancelar'
-                okButton='Confirmar'
-                autoTheme={false}
-                mode='short'
-              />
-            )}
+                <MonthPicker
+                  onChange={(event, newDate) => {
+                    setShow(false);
+                    setCurrentWeek(moment(newDate));
+                  }}
+                  value={currentWeek.toDate()}
+                  cancelButton='Cancelar'
+                  okButton='Confirmar'
+                  autoTheme={false}
+                  mode='short'
+                />
+              )}
             </View>
           </View>
         )}
         theme={{
           selectedDayBackgroundColor: '#1E88E5',
-
           arrowColor: '#1E88E5',
-
           todayTextColor: 'rgb(104, 191, 241)',
-
           textDayHeaderFontSize: 14,
           textDayHeaderFontWeight: 'bold',
-
           textSectionTitleColor: '#1E88E5',
           textSectionTitleDisabledColor: '#A8C0DE',
-
-          dayTextColor: '#025AC0', 
-
+          dayTextColor: '#025AC0',
         }}
       />
     </>

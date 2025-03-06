@@ -285,6 +285,16 @@ const styles = StyleSheet.create({
   });
 
   const styles_form = StyleSheet.create({
+    labelow:{
+      flexDirection: 'row',
+      alignItems: 'center',
+      
+    },
+    noAppointmentsText: {
+      fontSize: 18,
+      color: 'rgba(25, 140, 255, 0.3)',
+      marginTop: 10,
+    },
     container: {
       flex: 1,
       justifyContent: 'center',

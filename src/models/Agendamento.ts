@@ -9,8 +9,9 @@ export default class Agendamento {
     horario: string;
     profissional: string;
     color: string;
+    status: string;
 
-    constructor(cliente: string,tipo: string, data: Date, horario: string, profissional: string, color: string) {
+    constructor(cliente: string,tipo: string, data: Date, horario: string, profissional: string, color: string, status:string) {
         this.id = Agendamento.proximoId++; 
         this.cliente = cliente;
         this.tipo = tipo;
@@ -20,5 +21,6 @@ export default class Agendamento {
         this.color = color;
         this.dt_criacao = new Date();
         this.hora_criacao = new Date().toLocaleTimeString();
+        this.status = status;
     }
 }

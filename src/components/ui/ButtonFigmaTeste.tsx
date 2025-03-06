@@ -11,9 +11,11 @@ interface ModalButtonProps {
   icone?: string; 
   cor?: string;  
   background?: string;  
+  setLista: (date: string | false | any[]) => void;
+  selectedDate: any
 }
 
-const ModalButton = ({ buttonText, icone, cor, background }: ModalButtonProps) => {
+const ModalButton = ({ buttonText, icone, cor, background, setLista, selectedDate }: ModalButtonProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleModal = () => {
@@ -26,7 +28,7 @@ const ModalButton = ({ buttonText, icone, cor, background }: ModalButtonProps) =
         <Text style={styles_form.openButtonText}>{buttonText}</Text>
         {icone && <Ionicons name={icone as keyof typeof Ionicons.glyphMap} size={20} color={cor} />}
       </TouchableOpacity>
-      <ScheduleModal visible={isVisible} onClose={toggleModal} />
+      <ScheduleModal visible={isVisible} onClose={toggleModal} setLista={setLista} selectedDate={selectedDate} />
     </View>
   );
 };
