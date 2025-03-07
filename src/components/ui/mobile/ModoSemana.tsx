@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import LocaleConfig from '../../../assets/static/configuracoes';
+import LocaleConfig from '../../../../assets/static/configuracoes';
 import { styles } from '../../../style/style';
 import moment from 'moment';
 import 'moment/locale/pt-br';

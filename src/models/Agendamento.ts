@@ -23,4 +23,6 @@ export default class Agendamento {
         this.hora_criacao = new Date().toLocaleTimeString();
         this.status = status;
     }
+
+   
 }

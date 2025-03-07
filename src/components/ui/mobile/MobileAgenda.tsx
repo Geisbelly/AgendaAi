@@ -10,33 +10,32 @@ import Agendamento from '../../../models/Agendamento';
 const MobileAgenda = () => {
   const [selectedDate, setSelectedDate] = useState(moment().format('YYYY-MM-DD'));
   const [lista, setLista] = useState<Agendamento[]>([]);
-  const [filteredAppointments, setFilteredAppointments] = useState<Agendamento[]>([]);
+  const [filteredAppointments, setFilteredAppointments] = useState<any[]>([]);
   const [filtList, setFiltList] = useState<Agendamento[]>([]);
 
-  async function get ()  {
+  async function get() {
     const lis = await getData('@agendamentos');
-    if (lis){
-      setLista(lis);
+    if (Array.isArray(lis)) {
+      
+      setLista(lis);  // Armazena como instâncias de Agendamento
     }
-   
-  };
+  }
 
   const init = useCallback(() => {
-    
+    // Certifique-se de que estamos mapeando corretamente as instâncias de Agendamento
     const filtered = lista.map((app: Agendamento) => ({
       ...app,
-      hora_criacao: app.hora_criacao || '00:00',
+      hora_criacao: app.hora_criacao,
     }));
+
     setFilteredAppointments(filtered);
 
     setFiltList(
       filtered.filter(
-        (app: Agendamento) =>
-          moment.utc(app.dt_consulta).format('YYYY-MM-DD') === moment.utc(selectedDate).format('YYYY-MM-DD')
+        (app: Agendamento) => moment.utc(app.dt_consulta).format('YYYY-MM-DD') === moment.utc(selectedDate).format('YYYY-MM-DD')
       )
     );
-  
-  }, [lista, selectedDate, setLista]);
+  }, [lista, selectedDate]);
 
   useEffect(() => {
     get();

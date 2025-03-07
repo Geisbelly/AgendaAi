@@ -374,15 +374,31 @@ const styles = StyleSheet.create({
       color:'#7D8FB3'
     },
     button: {
+      flex: 1, // Faz os botões ocuparem espaço igual
       backgroundColor: '#1E88E5',
-      paddingVertical: 10,
-      borderRadius: 6,
+      paddingVertical: 12,
+      borderRadius: 8,
       alignItems: 'center',
+      marginHorizontal: 5, // Espaçamento lateral
     },
     buttonText: {
       color: '#fff',
       fontWeight: '700',
       fontSize: 16,
+    },
+    buttonContainer: {
+      width:'100%',
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    buttonLixo: {
+      backgroundColor: 'rgba(255, 25, 25, 0.8)',
+      paddingVertical: 10,
+      paddingHorizontal:20,
+      borderRadius: 6,
+      alignItems: 'center',
+      minWidth:'50%'
     },
     error:{
       color: 'red',

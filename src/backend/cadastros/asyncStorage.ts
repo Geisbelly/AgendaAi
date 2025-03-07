@@ -1,23 +1,55 @@
+
 import Agendamento from '../../models/Agendamento';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 const saveData = async (chave: string, novoValor: any) => {
-    try {
-      await AsyncStorage.setItem(chave, JSON.stringify([novoValor]));
-      
-      const savedValue = await AsyncStorage.getItem(chave);
-      if (savedValue) {
-        console.log('Salvo com sucesso!');
-        return savedValue;
+  try {
+      let objeto;
+      if (chave === '@agendamentos') {
+          const obj = new Agendamento(
+              novoValor.cliente,
+              novoValor.tipo,
+              novoValor.dt_consulta,
+              novoValor.horario,
+              novoValor.profissional,
+              novoValor.color,
+              novoValor.status
+          );
+
+          objeto = {
+              id: obj.id,
+              cliente: obj.cliente,
+              profissional: obj.profissional,
+              tipo: obj.tipo,
+              color: obj.color,
+              dt_consulta: obj.dt_consulta,
+              horario: obj.horario,
+              dt_criacao: obj.dt_criacao,
+              hora_criacao: obj.hora_criacao,
+              status: obj.status,
+          };
       } else {
-        console.error('Falha ao salvar.');
-        return false;
+          objeto = novoValor;
       }
-    } catch (error) {
+
+      // Recupera os dados existentes
+      const existingData = await AsyncStorage.getItem(chave);
+      const parsedData = existingData ? JSON.parse(existingData) : [];
+
+      // Adiciona o novo objeto à lista existente
+      const updatedData = [...parsedData, objeto];
+
+      // Salva os dados atualizados no AsyncStorage
+      await AsyncStorage.setItem(chave, JSON.stringify(updatedData));
+
+      console.log('Salvo com sucesso!');
+      return updatedData;
+  } catch (error) {
       console.error('Erro ao salvar:', error);
       return false;
-    }
-  };
+  }
+};
   
 
   const getData = async (chave: string) => {
@@ -51,6 +83,44 @@ const removeData = async (chave: string) => {
     return false;
   }
 };
+
+const removeItem = async (chave: string, id: number) => {
+  try {
+    // Recupera os dados existentes do AsyncStorage
+    const existingData = await AsyncStorage.getItem(chave);
+
+    if (existingData) {
+      // Se houver dados, converte de volta para JSON
+      const parsedData = JSON.parse(existingData);
+
+      // Filtra os dados para remover o item com o id fornecido
+      const updatedData = parsedData.filter((item: any) => item.id !== id);
+
+      // Armazena os dados atualizados de volta no AsyncStorage
+      await AsyncStorage.setItem(chave, JSON.stringify(updatedData));
+
+      // Verifica se o item foi removido
+      const value = await AsyncStorage.getItem(chave);
+      const dataAfterRemoval = value ? JSON.parse(value) : [];
+      const itemRemoved = !dataAfterRemoval.some((item: any) => item.id === id);
+
+      if (itemRemoved) {
+        console.log('Item removido com sucesso!');
+        return true;
+      } else {
+        console.error('Falha ao remover o item.');
+        return false;
+      }
+    } else {
+      console.error('Nenhum dado encontrado para remover.');
+      return false;
+    }
+  } catch (error) {
+    console.error('Erro ao remover:', error);
+    return false;
+  }
+};
+
 
 const editData = async (chave: string, id: Number, novoValor: any) => {
     try {
@@ -130,4 +200,4 @@ const mergeData = async (chave: string, valor: any) => {
   }
 };
 
-export { updateData, removeData, getData, saveData, mergeData, editData };
+export { updateData, removeData, getData, saveData, mergeData, editData,removeItem };

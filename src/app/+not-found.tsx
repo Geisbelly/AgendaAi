@@ -11,7 +11,7 @@ export default function NotFoundScreen() {
     </View>
   );
 }
-
+ 
 const styles = StyleSheet.create({
   container: {
     flex: 1,

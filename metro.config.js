@@ -1,9 +1,4 @@
-const path = require('path');
+// metro.config.js
+const { getDefaultConfig } = require('@expo/metro-config');
 
-module.exports = {
-  resolver: {
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-    },
-  },
-};
+module.exports = getDefaultConfig(__dirname);

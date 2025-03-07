@@ -6,7 +6,7 @@ import moment from 'moment';
 import { styles_form } from '../../style/style';
 import Agendamento from '../../models/Agendamento';
 import  SelectCountryScreen  from './Combobox';
-import { getData, saveData, updateData, editData } from '../../backend/cadastros/asyncStorage';
+import { getData, saveData, updateData, editData, removeItem } from '../../backend/cadastros/asyncStorage';
 
 
 const ScheduleModal = ({ visible, onClose, item, Title, setLista, selectedDate }: { visible: boolean, onClose: () => void, item?: Agendamento, Title?: string, setLista: (date: string | false | any[]) => void, selectedDate:any }) => {
@@ -15,6 +15,7 @@ const ScheduleModal = ({ visible, onClose, item, Title, setLista, selectedDate }
   const [hora, setHora] = useState(new Date());  const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [id, setId] = useState<number | null>(null);
+
 
   useEffect(() => {
     if (item) {
@@ -26,49 +27,66 @@ const ScheduleModal = ({ visible, onClose, item, Title, setLista, selectedDate }
       setId(item.id);
       setValue('id', item.id);
       setValue('status', item.status);
-      setData(item.dt_consulta ? new Date(item.dt_consulta).setDate(new Date(item.dt_consulta).getDate() + 1) : selectedDate);
+      setValue('dt_consulta', item.dt_consulta || '');
+      setData(item.dt_consulta ? new Date(new Date(item.dt_consulta).setDate(new Date(item.dt_consulta).getDate() + 1)) : selectedDate);
       setHora(item.horario ? moment(item.horario, 'HH:mm').toDate() : new Date());
     }
   }, [item, setValue]);
 
-  const onSubmit = useCallback(async (formData: any) => {
+  async function  onSubmit  (formData: any){
     const body = {
-      id: id ?? undefined,
+      id: formData.id,
       cliente: formData.cliente,
       profissional: formData.profissional,
       tipo: formData.tipo,
       color: formData.color,
       dt_consulta: moment(data).format('YYYY-MM-DD'),
       horario: moment(hora).format('HH:mm'),
-      dt_criacao: moment().format('YYYY-MM-DD'),
-      hora_criacao: moment().format('HH:mm:ss'),
       status: formData.status,
     };
 
+      let value;
+      if (id !== null && id !== undefined) {
+        value = await editData('@agendamentos', id, body);
+        
+      } else {
+        value = await saveData('@agendamentos', body);
 
-    if (id !== null) {
-      const value = await editData('@agendamentos', id, body);
+      }
       setLista(value);
-    } else {
-      const existingData = await getData('@agendamentos');
-      const value = existingData ? await updateData('@agendamentos', body) : await saveData('@agendamentos', body);
-      setLista(value);
-    }
+      console.log(value)
 
+    onClean()
+    onClose();
+    
+  };
+
+
+  const onClean = useCallback(async () => {
+    
     setValue('cliente',   '');
-      setValue('tipo', '');
-      setValue('horario', '');
-      setValue('profissional', '');
-      setValue('color', '#000000');
-      setId(0);
-      setValue('id', '');
-      setValue('status', '');
-      setData( selectedDate);
-      setHora( new Date());
+    setValue('tipo', '');
+    setValue('horario', '');
+    setValue('profissional', '');
+    setValue('color', '#000000');
+    setId(null);
+    setValue('id', '');
+    setValue('status', '');
+    setData( selectedDate);
+    setHora( new Date());
+   
+    
+  }, [ onClose]);
 
+
+
+  const onDelete = useCallback(async () => {
+    await removeItem('@agendamentos',Number(id))
+    const existingData = await getData('@agendamentos');
+    setLista(existingData);
    
     onClose();
-  }, [id, data, hora, setLista, onClose, setValue]);
+  }, [id, setLista, onClose, setValue]);
 
   return (
     <Modal visible={visible} animationType="slide" transparent={true} onRequestClose={onClose}>
@@ -130,9 +148,7 @@ const ScheduleModal = ({ visible, onClose, item, Title, setLista, selectedDate }
                
               </View>
            </View>
-           {errors.tipo && <Text style={styles_form.error}>Campo obrigatório</Text>}
-           {errors.status && <Text style={styles_form.error}>Campo obrigatório</Text>}
-           
+           {(errors.tipo ||errors.status)&& <Text style={styles_form.error}>Campo obrigatório</Text>}  
 
             <Text style={styles_form.label}>Data da Consulta</Text>
             <View style={styles_form.dateTimeContainer}>
@@ -142,13 +158,13 @@ const ScheduleModal = ({ visible, onClose, item, Title, setLista, selectedDate }
               
               {showDatePicker && (
                 <DateTimePicker
-                  value={data}
+                  value={new Date(data)}
                   mode="date"
                   display="default"
                   accentColor='#1E88E5'
-                  onChange={(event, selectedDate) => {
+                  onChange={(event, selectedD) => {
                     setShowDatePicker(false);
-                    if (selectedDate) setData(selectedDate);
+                    if (selectedD) setData(selectedD);
                   }}
                 />
               )}
@@ -181,10 +197,18 @@ const ScheduleModal = ({ visible, onClose, item, Title, setLista, selectedDate }
                 <TextInput style={styles_form.input} value={value} onChangeText={onChange} />
               )}
             />
+            <View style={styles_form.buttonContainer}>
+              {id && (
+                <TouchableOpacity style={styles_form.buttonLixo} onPress={onDelete}>
+                  <Text style={styles_form.buttonText}>APAGAR</Text>
+                </TouchableOpacity>
+              )}
+              
+              <TouchableOpacity style={styles_form.button} onPress={handleSubmit(onSubmit)}>
+                <Text style={styles_form.buttonText}>AGENDAR</Text>
+              </TouchableOpacity>
+            </View>
 
-            <TouchableOpacity style={styles_form.button} onPress={handleSubmit(onSubmit)}>
-              <Text style={styles_form.buttonText}>AGENDAR</Text>
-            </TouchableOpacity>
           </View>
         </View>
       </TouchableOpacity>
