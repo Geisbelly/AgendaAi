@@ -26,8 +26,7 @@ const ScheduleModal = ({ visible, onClose, item, Title, setLista, selectedDate }
       setId(item.id);
       setValue('id', item.id);
       setValue('status', item.status);
-      setValue('dt_consulta', item.dt_consulta || '');
-      setData(item.dt_consulta ? new Date(item.dt_consulta).setDate(new Date(item.dt_consulta).getDate() + 1): selectedDate );
+      setData(item.dt_consulta ? new Date(item.dt_consulta).setDate(new Date(item.dt_consulta).getDate() + 1) : selectedDate);
       setHora(item.horario ? moment(item.horario, 'HH:mm').toDate() : new Date());
     }
   }, [item, setValue]);
@@ -143,13 +142,13 @@ const ScheduleModal = ({ visible, onClose, item, Title, setLista, selectedDate }
               
               {showDatePicker && (
                 <DateTimePicker
-                  value={new Date(data)}
+                  value={data}
                   mode="date"
                   display="default"
                   accentColor='#1E88E5'
-                  onChange={(event, selectedD) => {
+                  onChange={(event, selectedDate) => {
                     setShowDatePicker(false);
-                    if (selectedD) setData(selectedD);
+                    if (selectedDate) setData(selectedDate);
                   }}
                 />
               )}
