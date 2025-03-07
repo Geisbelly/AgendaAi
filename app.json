@@ -28,6 +28,7 @@
       "package": "com.anonymous.AgendaAi"
     },
     "web": {
+      "webpack":true,
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
