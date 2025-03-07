@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import LocaleConfig from '../../../../assets/static/configuracoes';
-import { styles } from '@/style/style';
+import LocaleConfig from '../../../assets/static/configuracoes';
+import { styles } from '../../../style/style';
 import moment from 'moment';
 import 'moment/locale/pt-br';
-import Agendamento from '@/models/Agendamento';
+import Agendamento from '../../../models/Agendamento';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 

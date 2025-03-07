@@ -3,10 +3,10 @@ import { Modal, View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
-import { styles_form } from '@/style/style';
-import Agendamento from '@/models/Agendamento';
+import { styles_form } from '../../style/style';
+import Agendamento from '../../models/Agendamento';
 import  SelectCountryScreen  from './Combobox';
-import { getData, saveData, updateData, editData } from '@/backend/cadastros/asyncStorage';
+import { getData, saveData, updateData, editData } from '../../backend/cadastros/asyncStorage';
 
 
 const ScheduleModal = ({ visible, onClose, item, Title, setLista, selectedDate }: { visible: boolean, onClose: () => void, item?: Agendamento, Title?: string, setLista: (date: string | false | any[]) => void, selectedDate:any }) => {

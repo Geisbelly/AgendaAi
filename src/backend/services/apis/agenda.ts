@@ -1,4 +1,4 @@
-import Agendamento from '@/models/Agendamento';
+import Agendamento from '../../../models/Agendamento';
 import moment from 'moment';
 
 // Método POST

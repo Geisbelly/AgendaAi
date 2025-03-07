@@ -1,11 +1,9 @@
-const { getDefaultConfig } = require('metro-config');
+const path = require('path');
 
 module.exports = {
-  ...getDefaultConfig(),
   resolver: {
-    blockList: [
-      /node_modules\/react-native\/.*/,
-      // Adicione outras pastas se necessário
-    ],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
   },
 };

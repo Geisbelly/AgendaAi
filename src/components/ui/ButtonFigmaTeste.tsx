@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import {styles_form} from '@/style/style';
-import ScheduleModal from '@/components/ui/FormAgendamento';
+import {styles_form} from '../../style/style';
+import ScheduleModal from '../../components/ui/FormAgendamento';
 
 import "react-datepicker/dist/react-datepicker.css";
 

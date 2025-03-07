@@ -29,8 +29,8 @@
     },
     "web": {
       "build": {
-      "webpack": true
-      },
+        "webpack": true
+        },
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"

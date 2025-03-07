@@ -3,9 +3,9 @@ import { View } from 'react-native';
 import moment from 'moment';
 import Listagem from './Listagem';
 import CalendarioModos from './CalendarioModos';
-import { styles } from '@/style/style';
-import { getData } from '@/backend/cadastros/asyncStorage';
-import Agendamento from '@/models/Agendamento';
+import { styles } from '../../../style/style';
+import { getData } from '../../../backend/cadastros/asyncStorage';
+import Agendamento from '../../../models/Agendamento';
 
 const MobileAgenda = () => {
   const [selectedDate, setSelectedDate] = useState(moment().format('YYYY-MM-DD'));

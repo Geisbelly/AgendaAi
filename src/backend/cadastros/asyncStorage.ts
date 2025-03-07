@@ -1,4 +1,4 @@
-import Agendamento from '@/models/Agendamento';
+import Agendamento from '../../models/Agendamento';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const saveData = async (chave: string, novoValor: any) => {

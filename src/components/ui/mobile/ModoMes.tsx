@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Platform } from 'react-native';
 import { Calendar } from 'react-native-calendars';
-import { styles } from '@/style/style';
+import { styles } from '../../../style/style';
 import moment from 'moment';
 import 'moment/locale/pt-br';
-import Agendamento from '@/models/Agendamento';
+import Agendamento from '../../../models/Agendamento';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 

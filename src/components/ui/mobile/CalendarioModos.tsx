@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import {styles} from '@/style/style';
+import {styles} from '../../../style/style';
 import ModoMes from './ModoMes';
 import ModoSemana from './ModoSemana';
-import Agendamento from '@/models/Agendamento';
+import Agendamento from '../../../models/Agendamento';
 import ToggleButton from '../ButtonModosViewAgenda';
 
 const CalendarioModos = ({ selectedDate, setSelectedDate, filteredAppointment }:{selectedDate:string, setSelectedDate: (date: string) => void, filteredAppointment:Agendamento[] }) => {
