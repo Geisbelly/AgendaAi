@@ -31,8 +31,8 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={DefaultTheme}>
       <Stack>
-        <Stack.Screen name="(app)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+        <Stack.Screen name="Agenda" options={{ headerShown: false }} />
+        <Stack.Screen name="+not-found"  initialParams={RootLayout} />
       </Stack>
     </ThemeProvider>
   );

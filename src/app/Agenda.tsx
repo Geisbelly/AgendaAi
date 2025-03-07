@@ -22,9 +22,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <>
       {/* Exibe Drawer para Web */}
       {Platform.OS === 'web' ? (
-        <Drawer>
-          <Drawer.Screen name="Agenda" options={{ title: 'Agenda' }} initialParams={[WebAgenda]}/>
-        </Drawer>
+        // <Drawer>
+        //   <Drawer.Screen name="Agenda" options={{ title: 'Agenda' }} initialParams={[WebAgenda]}/>
+        // </Drawer>
+        <View><WebAgenda></WebAgenda></View>
       ) : (
         // Exibe Tabs para dispositivos móveis
         // <Tabs

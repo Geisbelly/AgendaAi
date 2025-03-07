@@ -1,5 +1,10 @@
 {
   "expo": {
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "name": "AgendaAi",
     "slug": "AgendaAi",
     "version": "1.0.0",
@@ -9,7 +14,11 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.AgendaAi",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -37,6 +46,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "1883c549-a15e-4225-aa82-1c88bc61b9f8"
+      }
     }
   }
 }
