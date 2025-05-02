@@ -3,7 +3,7 @@ import 'react-native-reanimated';
 import {  ReactNode } from 'react';
 
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout() {
 
   return (
     <View>
