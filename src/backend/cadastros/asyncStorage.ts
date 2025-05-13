@@ -1,5 +1,5 @@
 
-import Agendamento from '../../models/Agendamento';
+import {Calendario} from '../../models/Calendario'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -7,7 +7,7 @@ const saveData = async (chave: string, novoValor: any) => {
   try {
       let objeto;
       if (chave === '@agendamentos') {
-          const obj = new Agendamento(
+          const obj = new Calendario(
               novoValor.cliente,
               novoValor.tipo,
               novoValor.dt_consulta,
@@ -18,16 +18,8 @@ const saveData = async (chave: string, novoValor: any) => {
           );
 
           objeto = {
-              id: obj.id,
-              cliente: obj.cliente,
-              profissional: obj.profissional,
-              tipo: obj.tipo,
-              color: obj.color,
-              dt_consulta: obj.dt_consulta,
-              horario: obj.horario,
-              dt_criacao: obj.dt_criacao,
-              hora_criacao: obj.hora_criacao,
-              status: obj.status,
+              id: obj.id
+             
           };
       } else {
           objeto = novoValor;
@@ -133,7 +125,7 @@ const editData = async (chave: string, id: Number, novoValor: any) => {
         const parsedData = JSON.parse(existingData);
   
         // Encontrar o item pelo ID e atualizar o valor
-        updatedData = parsedData.map((item: Agendamento) => 
+        updatedData = parsedData.map((item: Calendario) => 
           item.id === id ? { ...item, ...novoValor } : item
         );
   

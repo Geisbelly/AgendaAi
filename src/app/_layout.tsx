@@ -20,7 +20,7 @@ export default function RootLayout() {
     if (fontsLoaded) {
       SplashScreen.hideAsync();
       // Redireciona para a página Agenda assim que as fontes forem carregadas
-      router.replace('/Agenda');
+      //router.replace('/u/Agenda');
     }
   }, [fontsLoaded, router]);
 
@@ -31,7 +31,9 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={DefaultTheme}>
       <Stack>
-        <Stack.Screen name="Agenda" options={{ headerShown: false }} />
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="token" options={{ headerShown: false }} />
+        <Stack.Screen name="u/listaAgendas" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found"  initialParams={RootLayout} />
       </Stack>
     </ThemeProvider>
