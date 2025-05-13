@@ -8,7 +8,7 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={DefaultTheme}>
       <Stack>
-        <Stack.Screen name="Agenda" options={{ headerShown: false }} />
+        <Stack.Screen name="agenda" options={{ headerShown: false }} />
         <Stack.Screen name="listaAgendas" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
