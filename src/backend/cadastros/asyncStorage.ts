@@ -14,7 +14,8 @@ const saveData = async (chave: string, novoValor: any) => {
               novoValor.horario,
               novoValor.profissional,
               novoValor.color,
-              novoValor.status
+              novoValor.status,
+              novoValor.visivel // Add the missing 'visivel' argument
           );
 
           objeto = {

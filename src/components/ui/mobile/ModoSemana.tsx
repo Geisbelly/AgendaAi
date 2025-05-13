@@ -5,7 +5,6 @@ import LocaleConfig from '../../../../assets/static/configuracoes';
 import { styles } from '../../../style/style';
 import moment from 'moment';
 import 'moment/locale/pt-br';
-import Agendamento from '../../../models/Agendamento';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -14,7 +13,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 moment.locale('pt-br');
 
-const ModoSemana = ({ selectedDate, setSelectedDate, filteredAppointment }: { selectedDate: string; setSelectedDate: (date: string) => void, filteredAppointment: Agendamento[] }) => {
+const ModoSemana = ({ selectedDate, setSelectedDate, filteredAppointment }: { selectedDate: string; setSelectedDate: (date: string) => void, filteredAppointment: any[] }) => {
   const [currentWeek, setCurrentWeek] = useState(moment(selectedDate));
   const [scheduledDays, setScheduledDays] = useState<{ [key: string]: number }>({}); 
   const [show, setShow] = useState(false);
