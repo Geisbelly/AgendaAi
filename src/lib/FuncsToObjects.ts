@@ -1,6 +1,7 @@
 import { Calendario, Agent, Informations } from '../models/Calendario'
 import {Evento} from '../models/Eventos' // Caso você vá popular depois
 
+
 export default class Conversions {
   public static toCalendario = (json: any): Calendario => {
     const info = new Informations(

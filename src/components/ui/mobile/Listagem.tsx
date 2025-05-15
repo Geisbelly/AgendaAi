@@ -3,18 +3,17 @@ import { View, Text, FlatList } from 'react-native';
 import ModalButton from '../../../components/ui/ButtonFigmaTeste';
 import { styles } from '../../../style/style';
 import ConatinerCardsLista from '../../../components/ui/mobile/ContainerCardsLista';
-import Agendamento from '../../../models/Agendamento';
 import { Ionicons } from '@expo/vector-icons';
 import {styles_form} from '../../../style/style';
 
-const Listagem = ({ selectedDate, filteredAppointment, setLista }: { selectedDate: string, filteredAppointment: Agendamento[], setLista: (date:  any) => void }) => {
+const Listagem = ({ selectedDate, filteredAppointment, setLista }: { selectedDate: string, filteredAppointment: any[], setLista: (date:  any) => void }) => {
     const groupedAppointments = filteredAppointment.reduce((acc, appointment) => {
         if (!acc[appointment.horario]) {
             acc[appointment.horario] = [];
         }
         acc[appointment.horario].push(appointment);
         return acc;
-    }, {} as Record<string, Agendamento[]>);
+    }, {} as Record<string, any[]>);
 
     const sortedAppointments = Object.entries(groupedAppointments)
         .sort(([timeA], [timeB]) => {
@@ -39,7 +38,7 @@ const Listagem = ({ selectedDate, filteredAppointment, setLista }: { selectedDat
                 style={styles.list}
                 showsVerticalScrollIndicator={false}
                 renderItem={({ item: [horario, appointments] }) => (
-                    <ConatinerCardsLista key={horario} horario={horario} appointments={appointments} setLista={setLista} selectedDate={selectedDate} />
+                    <ConatinerCardsLista key={horario} horario={horario} appointments={appointments as any} setLista={setLista} selectedDate={selectedDate} />
                 )}
             />):(
                 <View style={styles_form.container}>

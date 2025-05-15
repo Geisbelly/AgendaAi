@@ -32,8 +32,10 @@ export default function RootLayout() {
     <ThemeProvider value={DefaultTheme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
+
         <Stack.Screen name="token" options={{ headerShown: false }} />
         <Stack.Screen name="u/listaAgendas" options={{ headerShown: false }} />
+
         <Stack.Screen name="+not-found"  initialParams={RootLayout} />
       </Stack>
     </ThemeProvider>

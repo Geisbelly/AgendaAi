@@ -4,7 +4,6 @@ import { Calendar } from 'react-native-calendars';
 import { styles } from '../../../style/style';
 import moment from 'moment';
 import 'moment/locale/pt-br';
-import Agendamento from '../../../models/Agendamento';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -15,7 +14,7 @@ interface MyObject {
   [key: string]: any;
 }
 
-const ModoMes = ({ selectedDate, setSelectedDate, filteredAppointment }: { selectedDate: string; setSelectedDate: (date: string) => void, filteredAppointment: Agendamento[] }) => {
+const ModoMes = ({ selectedDate, setSelectedDate, filteredAppointment }: { selectedDate: string; setSelectedDate: (date: string) => void, filteredAppointment: any[] }) => {
   const [currentWeek, setCurrentWeek] = useState(moment(selectedDate));
   const [markedDates, setMarkedDates] = useState<{ [key: string]: any }>({});
   const [show, setShow] = useState(false);

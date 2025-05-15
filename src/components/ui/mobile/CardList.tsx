@@ -3,9 +3,8 @@ import { View, Text,  TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {styles} from '../../../style/style';
 import ScheduleModal from '../../../components/ui/FormAgendamento';
-import Agendamento from '../../../models/Agendamento';
 
-const CardList = ({item, setLista, selectedDate}: {item:Agendamento, setLista:(data: any)=>void, selectedDate:any}) => {
+const CardList = ({item, setLista, selectedDate}: {item:any, setLista:(data: any)=>void, selectedDate:any}) => {
     const [isVisible, setIsVisible] = useState(false);
     
       const toggleModal = () => {

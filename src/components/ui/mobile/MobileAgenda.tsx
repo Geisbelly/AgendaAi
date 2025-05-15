@@ -5,13 +5,12 @@ import Listagem from './Listagem';
 import CalendarioModos from './CalendarioModos';
 import { styles } from '../../../style/style';
 import { getData } from '../../../backend/cadastros/asyncStorage';
-import Agendamento from '../../../models/Agendamento';
 
 const MobileAgenda = () => {
   const [selectedDate, setSelectedDate] = useState(moment().format('YYYY-MM-DD'));
-  const [lista, setLista] = useState<Agendamento[]>([]);
+  const [lista, setLista] = useState<any[]>([]);
   const [filteredAppointments, setFilteredAppointments] = useState<any[]>([]);
-  const [filtList, setFiltList] = useState<Agendamento[]>([]);
+  const [filtList, setFiltList] = useState<any[]>([]);
 
   async function get() {
     const lis = await getData('@agendamentos');
@@ -23,7 +22,7 @@ const MobileAgenda = () => {
 
   const init = useCallback(() => {
     // Certifique-se de que estamos mapeando corretamente as instâncias de Agendamento
-    const filtered = lista.map((app: Agendamento) => ({
+    const filtered = lista.map((app: any) => ({
       ...app,
       hora_criacao: app.hora_criacao,
     }));
@@ -32,7 +31,7 @@ const MobileAgenda = () => {
 
     setFiltList(
       filtered.filter(
-        (app: Agendamento) => moment.utc(app.dt_consulta).format('YYYY-MM-DD') === moment.utc(selectedDate).format('YYYY-MM-DD')
+        (app: any) => moment.utc(app.dt_consulta).format('YYYY-MM-DD') === moment.utc(selectedDate).format('YYYY-MM-DD')
       )
     );
   }, [lista, selectedDate]);

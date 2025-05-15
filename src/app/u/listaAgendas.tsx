@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+
 import { Calendario } from '../../models/Calendario';
 import { AuthService } from '../../backend/services/session';
+
 
 
 const TelaSelecaoAgendas = () => {
@@ -11,8 +13,10 @@ const TelaSelecaoAgendas = () => {
 
   useEffect(()=>{
     AuthService.getTemporariAgenda().then((agendas: Calendario[]) => {
+
       console.log(agendas);
       
+
       setAgendaDisponivel(agendas);
     });
   },[])
@@ -115,7 +119,11 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     borderWidth: 1,
     borderColor: '#e0e0e0',
-   
+
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.06,
+    shadowRadius: 2,
     elevation: 2,
   },
   cardTexto: {
@@ -143,4 +151,6 @@ const styles = StyleSheet.create({
   },
 });
 
+
 export default TelaSelecaoAgendas;
+

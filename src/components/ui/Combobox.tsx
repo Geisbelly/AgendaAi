@@ -121,7 +121,7 @@ const SelectCountryScreen = (_props: any) => {
       iconColor={textColor}
       selectedTextStyle={styles.selectedTextStyle}
       placeholderStyle={styles.placeholderStyle}
-      imageStyle={[styles.imageStyle, {width:iconeWidth, height:iconeHeight}]}
+      //imageStyle={[styles.imageStyle, {width:iconeWidth, height:iconeHeight}]}
       iconStyle={styles.iconStyle }
       maxHeight={200}
       activeColor={backgroundColor}

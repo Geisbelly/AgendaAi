@@ -4,12 +4,12 @@ import { useForm, Controller } from 'react-hook-form';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import { styles_form } from '../../style/style';
-import Agendamento from '../../models/Agendamento';
+
 import  SelectCountryScreen  from './Combobox';
 import { getData, saveData, updateData, editData, removeItem } from '../../backend/cadastros/asyncStorage';
 
 
-const ScheduleModal = ({ visible, onClose, item, Title, setLista, selectedDate }: { visible: boolean, onClose: () => void, item?: Agendamento, Title?: string, setLista: (date: string | false | any[]) => void, selectedDate:any }) => {
+const ScheduleModal = ({ visible, onClose, item, Title, setLista, selectedDate }: { visible: boolean, onClose: () => void, item?: any, Title?: string, setLista: (date: string | false | any[]) => void, selectedDate:any }) => {
   const { control, handleSubmit, setValue, formState: { errors } } = useForm();
   const [data, setData] = useState(new Date());
   const [hora, setHora] = useState(new Date());  const [showDatePicker, setShowDatePicker] = useState(false);

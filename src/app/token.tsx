@@ -9,10 +9,12 @@ import {
 } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+
 import { AuthService } from '../backend/services/session';
 import XanoApiAgenda from '../backend/services/apis/agenda';
 import { Calendario } from '../models/Calendario';
 import Conversions from '../lib/FuncsToObjects';
+
 
 const TelaToken = () => {
   const [token, setToken] = useState('');
@@ -38,12 +40,13 @@ const TelaToken = () => {
     if (dados !== null) {
       setSucesso(true);
       AuthService.login(token)
-      
+
       const calendarios: Calendario[] = dados.items.map((item:any) => {
         return Conversions.toCalendario(item)
       })
   
       await AuthService.temporariAgenda(calendarios)
+
       route.push('/u/listaAgendas')
     } else {
       setErro('Token inválido.');
@@ -158,3 +161,4 @@ const styles = StyleSheet.create({
 });
 
 export default TelaToken;
+

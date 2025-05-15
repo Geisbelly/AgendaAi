@@ -12,7 +12,7 @@
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymous.AgendaAi",
@@ -30,7 +30,7 @@
     "web": {
       "build": {
         "webpack": true
-        },
+      },
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
@@ -45,7 +45,18 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34,
+            "buildToolsVersion": "34.0.0"
+          }
+        }
+      ],
+      "expo-sqlite"
     ],
     "experiments": {
       "typedRoutes": true
@@ -55,7 +66,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "1883c549-a15e-4225-aa82-1c88bc61b9f8"
+        "projectId": "2e1105ab-040e-41d9-ba94-0dcdaf790d53"
       }
     }
   }

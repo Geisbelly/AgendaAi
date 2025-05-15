@@ -3,9 +3,10 @@
   "compilerOptions": {
     "strict": true,
     "baseUrl": "src",
+    "jsx": "react-jsx",
     "paths": {
       "@/*": [
-        "src/*"
+        "*"
       ]
     }
   },
